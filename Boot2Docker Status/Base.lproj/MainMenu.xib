@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="autoStartCheckbox" destination="pvg-RI-0nG" id="uLo-kV-ETE"/>
                 <outlet property="launchOnLoginBox" destination="lcC-N4-O37" id="pm0-WE-8Gc"/>
+                <outlet property="statusMenu" destination="9qk-6E-8IM" id="dSj-X1-7L4"/>
                 <outlet property="window" destination="H7e-dN-4jS" id="qPz-Mv-GgV"/>
             </connections>
         </customObject>
@@ -26,7 +27,7 @@
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="KcN-ud-zAS">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="295"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WcH-Q5-vB8">
                         <rect key="frame" x="20" y="219" width="84" height="76"/>
@@ -112,6 +113,22 @@ DQ
             </view>
             <point key="canvasLocation" x="341" y="387.5"/>
         </window>
+        <menu id="9qk-6E-8IM">
+            <items>
+                <menuItem title="Preferences" id="W6K-dk-ijN">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openWindow:" target="Voe-Tx-rLC" id="ByH-Vs-2lh"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" id="kwI-6h-GjV">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quit:" target="Voe-Tx-rLC" id="Omz-Bg-zDm"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
     </objects>
     <resources>
         <image name="docker" width="19.877300262451172" height="18.110429763793945"/>

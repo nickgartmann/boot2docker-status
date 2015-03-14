@@ -50,8 +50,18 @@
     [launchController setLaunchAtLogin:[sender state]];
 }
 
-- (void)openMenu:(id)sender {
-    NSLog(@"HERE");
+- (void)openMenu {
+    [self.statusItem setHighlightMode:YES];
+    [_statusItem popUpStatusItemMenu:_statusMenu];
+}
+
+- (IBAction)openWindow:(id)sender {
+    [self.statusItem setHighlightMode:NO];
+    [_window makeKeyAndOrderFront:sender];
+}
+
+- (IBAction)quit:(id)sender {
+    [NSApp terminate: nil];
 }
 
 - (IBAction)close:(id)sender {
@@ -59,11 +69,16 @@
 }
 
 - (void)toggleBoot2Docker:(id)sender {
-    _statusItem.image = [NSImage imageNamed:@"docker-loading"];
-    if([self isBoot2DockerRunning]) {
-        [self stopBoot2Docker];
+    if([NSEvent modifierFlags] & NSCommandKeyMask) {
+        [self.statusItem setHighlightMode:YES];
+        [self openMenu];
     } else {
-        [self startBoot2Docker];
+        _statusItem.image = [NSImage imageNamed:@"docker-loading"];
+        if([self isBoot2DockerRunning]) {
+            [self stopBoot2Docker];
+        } else {
+            [self startBoot2Docker];
+        }
     }
 }
 
