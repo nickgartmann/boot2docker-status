@@ -16,6 +16,7 @@
 		0341A1261AB4A60C00320BA8 /* docker-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341A1251AB4A60C00320BA8 /* docker-alt@2x.png */; };
 		0341A1281AB4BC3500320BA8 /* docker-loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341A1271AB4BC3500320BA8 /* docker-loading@2x.png */; };
 		0341A12C1AB4C1E200320BA8 /* docker-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341A12B1AB4C1E200320BA8 /* docker-full.png */; };
+		0341A1321AB4D60700320BA8 /* LaunchAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341A1311AB4D60700320BA8 /* LaunchAtLoginController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		0341A1251AB4A60C00320BA8 /* docker-alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "docker-alt@2x.png"; sourceTree = "<group>"; };
 		0341A1271AB4BC3500320BA8 /* docker-loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "docker-loading@2x.png"; sourceTree = "<group>"; };
 		0341A12B1AB4C1E200320BA8 /* docker-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "docker-full.png"; sourceTree = "<group>"; };
+		0341A1301AB4D5CF00320BA8 /* LaunchAtLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchAtLoginController.h; sourceTree = "<group>"; };
+		0341A1311AB4D60700320BA8 /* LaunchAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchAtLoginController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				0341A0F21AB49FEE00320BA8 /* AppDelegate.m */,
 				0341A0F61AB49FEE00320BA8 /* Images.xcassets */,
 				0341A0F81AB49FEE00320BA8 /* MainMenu.xib */,
+				0341A1301AB4D5CF00320BA8 /* LaunchAtLoginController.h */,
+				0341A1311AB4D60700320BA8 /* LaunchAtLoginController.m */,
 				0341A0EF1AB49FEE00320BA8 /* Supporting Files */,
 			);
 			path = "Boot2Docker Status";
@@ -226,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0341A1321AB4D60700320BA8 /* LaunchAtLoginController.m in Sources */,
 				0341A0F51AB49FEE00320BA8 /* main.m in Sources */,
 				0341A0F31AB49FEE00320BA8 /* AppDelegate.m in Sources */,
 			);

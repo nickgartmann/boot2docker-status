@@ -11,7 +11,13 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+            <connections>
+                <outlet property="autoStartCheckbox" destination="pvg-RI-0nG" id="uLo-kV-ETE"/>
+                <outlet property="launchOnLoginBox" destination="lcC-N4-O37" id="pm0-WE-8Gc"/>
+                <outlet property="window" destination="H7e-dN-4jS" id="qPz-Mv-GgV"/>
+            </connections>
+        </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <window title="Boot2Docker Status" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="H7e-dN-4jS">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
@@ -67,20 +73,23 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcC-N4-O37">
-                        <rect key="frame" x="127" y="54" width="315" height="18"/>
-                        <buttonCell key="cell" type="check" title="Automatically start Boot2Docker Status at login" bezelStyle="regularSquare" imagePosition="left" alignment="center" inset="2" id="pvg-RI-0nG">
-                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ShS-ku-rXb">
                         <rect key="frame" x="400" y="1" width="76" height="32"/>
                         <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AR1-dM-5hy">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                         </buttonCell>
+                        <connections>
+                            <action selector="close:" target="Voe-Tx-rLC" id="sBM-Ct-VSe"/>
+                        </connections>
                     </button>
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-g3-Mb3">
+                        <rect key="frame" x="218" y="118" width="42" height="40"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="docker-loading" id="962-MK-f7O"/>
+                    </imageView>
                     <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="shR-Lo-71T">
                         <rect key="frame" x="306" y="118" width="42" height="40"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="docker-alt" id="fAD-6n-3v9"/>
@@ -89,10 +98,16 @@
                         <rect key="frame" x="134" y="118" width="42" height="40"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="docker" id="mOF-6r-5rD"/>
                     </imageView>
-                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xvP-g3-Mb3">
-                        <rect key="frame" x="218" y="118" width="42" height="40"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="docker-loading" id="962-MK-f7O"/>
-                    </imageView>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcC-N4-O37">
+                        <rect key="frame" x="127" y="54" width="315" height="18"/>
+                        <buttonCell key="cell" type="check" title="Automatically start Boot2Docker Status at login" bezelStyle="regularSquare" imagePosition="left" alignment="center" inset="2" id="pvg-RI-0nG">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="toggleAutoStart:" target="Voe-Tx-rLC" id="JBy-c7-YcU"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <point key="canvasLocation" x="341" y="387.5"/>

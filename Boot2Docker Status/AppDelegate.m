@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow *window;
@@ -32,6 +33,10 @@
     // The image gets a blue background when the item is selected
     _statusItem.highlightMode = NO;
     
+    LaunchAtLoginController *launchController = [[LaunchAtLoginController alloc] init];
+    BOOL launch = [launchController launchAtLogin];
+    [_launchOnLoginBox setState:launch];
+    
     [_statusItem setTarget:self];
     [_statusItem setAction:@selector(toggleBoot2Docker:)];
 }
@@ -40,8 +45,17 @@
     // Insert code here to tear down your application
 }
 
+- (IBAction)toggleAutoStart:(id)sender {
+    LaunchAtLoginController *launchController = [[LaunchAtLoginController alloc] init];
+    [launchController setLaunchAtLogin:[sender state]];
+}
+
 - (void)openMenu:(id)sender {
     NSLog(@"HERE");
+}
+
+- (IBAction)close:(id)sender {
+    [_window close];
 }
 
 - (void)toggleBoot2Docker:(id)sender {
@@ -97,5 +111,6 @@
     
     [task launch];
 }
+
 
 @end
