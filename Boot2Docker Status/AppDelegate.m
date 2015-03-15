@@ -10,16 +10,26 @@
 
 
 @interface AppDelegate ()
-
+@property (weak) NSUserDefaults *standardUserDefaults;
 @property (weak) IBOutlet NSWindow *window;
 @end
+
+
+
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
+    
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    
+    _standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [_standardUserDefaults registerDefaults:@{
+        @"DisplayWindowOnStartup": @YES
+    }];
     
     // The text that will be shown in the menu bar
     _statusItem.title = @"";
@@ -37,8 +47,15 @@
     BOOL launch = [launchController launchAtLogin];
     [_launchOnLoginBox setState:launch];
     
+    [_showWindowOnStartupBox setState:[self shouldDisplayWindowOnBoot]];
+    
     [_statusItem setTarget:self];
     [_statusItem setAction:@selector(toggleBoot2Docker:)];
+    
+    if([self shouldDisplayWindowOnBoot]) {
+        [self openWindow:self];
+    }
+
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -66,6 +83,17 @@
 
 - (IBAction)close:(id)sender {
     [_window close];
+}
+
+- (IBAction)toggleShowWindowOnBoot:(id)sender {
+    if (_standardUserDefaults) [_standardUserDefaults setBool:[sender state] forKey:@"DisplayWindowOnStartup"];
+    [_standardUserDefaults synchronize];
+}
+
+- (BOOL)shouldDisplayWindowOnBoot {
+    BOOL val = YES;
+    if (_standardUserDefaults) val = [_standardUserDefaults boolForKey:@"DisplayWindowOnStartup"];
+    return val;
 }
 
 - (void)toggleBoot2Docker:(id)sender {

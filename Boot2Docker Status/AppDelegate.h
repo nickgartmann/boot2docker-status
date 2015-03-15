@@ -14,5 +14,6 @@
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (weak) IBOutlet NSButton *launchOnLoginBox;
 @property (weak) IBOutlet NSMenu *statusMenu;
+@property (weak) IBOutlet NSButton *showWindowOnStartupBox;
 
 @end
