@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A1746913-1435-4A4B-AF86-9F3A962898BE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Boot2Docker Status</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AEBE1D4ADAA890E39932A442C35D5C07DEE41EE9</key>
+		<string>github.com:nickgartmann/boot2docker-status.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Boot2Docker Status.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AEBE1D4ADAA890E39932A442C35D5C07DEE41EE9</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:nickgartmann/boot2docker-status.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AEBE1D4ADAA890E39932A442C35D5C07DEE41EE9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AEBE1D4ADAA890E39932A442C35D5C07DEE41EE9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Boot2Docker%20Status</string>
+		</dict>
+	</array>
+</dict>
+</plist>

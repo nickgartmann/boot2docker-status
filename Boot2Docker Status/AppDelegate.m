@@ -55,6 +55,11 @@
     if([self shouldDisplayWindowOnBoot]) {
         [self openWindow:self];
     }
+    [NSTimer scheduledTimerWithTimeInterval:2.0
+                                     target:self
+                                   selector:@selector(renderIcon:)
+                                   userInfo:nil
+                                    repeats:YES];
 
 }
 
@@ -74,6 +79,7 @@
 
 - (IBAction)openWindow:(id)sender {
     [self.statusItem setHighlightMode:NO];
+    [_window setIsVisible:TRUE];
     [_window makeKeyAndOrderFront:sender];
 }
 
@@ -107,6 +113,14 @@
         } else {
             [self startBoot2Docker];
         }
+    }
+}
+
+- (void)renderIcon:(id)sender {
+    if([self isBoot2DockerRunning]) {
+        _statusItem.image = [NSImage imageNamed:@"docker"];
+    } else {
+        _statusItem.image = [NSImage imageNamed:@"docker-alt"];
     }
 }
 

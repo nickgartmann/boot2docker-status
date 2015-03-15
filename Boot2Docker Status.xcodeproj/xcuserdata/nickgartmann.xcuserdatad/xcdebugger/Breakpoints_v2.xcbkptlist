@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Boot2Docker Status/AppDelegate.m"
-            timestampString = "448071257.940854"
+            timestampString = "448072377.648191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "-shouldDisplayWindowOnBoot"
             landmarkType = "5">
          </BreakpointContent>
