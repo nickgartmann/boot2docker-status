@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032563ED1AB50CA500B98388 /* boot2docker-status-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 032563EC1AB50CA500B98388 /* boot2docker-status-icon.png */; };
 		0341A0F31AB49FEE00320BA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341A0F21AB49FEE00320BA8 /* AppDelegate.m */; };
 		0341A0F51AB49FEE00320BA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341A0F41AB49FEE00320BA8 /* main.m */; };
 		0341A0F71AB49FEE00320BA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0341A0F61AB49FEE00320BA8 /* Images.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032563EC1AB50CA500B98388 /* boot2docker-status-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boot2docker-status-icon.png"; sourceTree = "<group>"; };
 		0341A0EC1AB49FEE00320BA8 /* Boot2Docker Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Boot2Docker Status.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0341A0F01AB49FEE00320BA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0341A0F11AB49FEE00320BA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				0341A12B1AB4C1E200320BA8 /* docker-full.png */,
+				032563EC1AB50CA500B98388 /* boot2docker-status-icon.png */,
 				0341A1231AB4A51500320BA8 /* docker@2x.png */,
 				0341A1251AB4A60C00320BA8 /* docker-alt@2x.png */,
 				0341A1271AB4BC3500320BA8 /* docker-loading@2x.png */,
@@ -208,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				032563ED1AB50CA500B98388 /* boot2docker-status-icon.png in Resources */,
 				0341A12C1AB4C1E200320BA8 /* docker-full.png in Resources */,
 				0341A1261AB4A60C00320BA8 /* docker-alt@2x.png in Resources */,
 				0341A1241AB4A51500320BA8 /* docker@2x.png in Resources */,
@@ -420,6 +424,7 @@
 				0341A10B1AB49FEE00320BA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0341A10C1AB49FEE00320BA8 /* Build configuration list for PBXNativeTarget "Boot2Docker StatusTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +433,7 @@
 				0341A10E1AB49FEE00320BA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
