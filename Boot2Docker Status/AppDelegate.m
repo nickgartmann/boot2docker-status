@@ -12,6 +12,7 @@
 @interface AppDelegate ()
 @property (weak) NSUserDefaults *standardUserDefaults;
 @property (weak) IBOutlet NSWindow *window;
+@property BOOL haveRequestedStateChange;
 @end
 
 
@@ -21,6 +22,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    
+    _haveRequestedStateChange = NO;
     
     
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
@@ -117,10 +120,12 @@
 }
 
 - (void)renderIcon:(id)sender {
-    if([self isBoot2DockerRunning]) {
-        _statusItem.image = [NSImage imageNamed:@"docker"];
-    } else {
-        _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+    if(!_haveRequestedStateChange) {
+        if([self isBoot2DockerRunning]) {
+            _statusItem.image = [NSImage imageNamed:@"docker"];
+        } else {
+            _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+        }
     }
 }
 
@@ -146,11 +151,13 @@
 }
 
 - (void)startBoot2Docker {
+    _haveRequestedStateChange = YES;
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:@"/bin/bash"];
     [task setArguments:@[@"-c", @"/usr/local/bin/boot2docker up"]];
     
     [task setTerminationHandler:^(NSTask *t) {
+        _haveRequestedStateChange = NO;
         _statusItem.image = [NSImage imageNamed:@"docker"];
     }];
     
@@ -158,11 +165,13 @@
 }
 
 - (void)stopBoot2Docker {
+    _haveRequestedStateChange = YES;
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:@"/bin/bash"];
     [task setArguments:@[@"-c", @"/usr/local/bin/boot2docker down"]];
     
     [task setTerminationHandler:^(NSTask *t) {
+        _haveRequestedStateChange = NO;
         _statusItem.image = [NSImage imageNamed:@"docker-alt"];
     }];
     
