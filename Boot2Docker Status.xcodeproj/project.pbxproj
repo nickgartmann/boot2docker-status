@@ -18,6 +18,7 @@
 		0341A1281AB4BC3500320BA8 /* docker-loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341A1271AB4BC3500320BA8 /* docker-loading@2x.png */; };
 		0341A12C1AB4C1E200320BA8 /* docker-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341A12B1AB4C1E200320BA8 /* docker-full.png */; };
 		0341A1321AB4D60700320BA8 /* LaunchAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0341A1311AB4D60700320BA8 /* LaunchAtLoginController.m */; };
+		AF625AC41AB87FBC00FDC72E /* docker-alt-dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF625AC31AB87FBC00FDC72E /* docker-alt-dark@2x.png */; };
 		AFA26B891AB8365500014A6F /* docker-dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFA26B881AB8365500014A6F /* docker-dark@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		0341A12B1AB4C1E200320BA8 /* docker-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "docker-full.png"; sourceTree = "<group>"; };
 		0341A1301AB4D5CF00320BA8 /* LaunchAtLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchAtLoginController.h; sourceTree = "<group>"; };
 		0341A1311AB4D60700320BA8 /* LaunchAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchAtLoginController.m; sourceTree = "<group>"; };
+		AF625AC31AB87FBC00FDC72E /* docker-alt-dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "docker-alt-dark@2x.png"; sourceTree = "<group>"; };
 		AFA26B881AB8365500014A6F /* docker-dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "docker-dark@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 				0341A1231AB4A51500320BA8 /* docker@2x.png */,
 				AFA26B881AB8365500014A6F /* docker-dark@2x.png */,
 				0341A1251AB4A60C00320BA8 /* docker-alt@2x.png */,
+				AF625AC31AB87FBC00FDC72E /* docker-alt-dark@2x.png */,
 				0341A1271AB4BC3500320BA8 /* docker-loading@2x.png */,
 				0341A0EE1AB49FEE00320BA8 /* Boot2Docker Status */,
 				0341A1021AB49FEE00320BA8 /* Boot2Docker StatusTests */,
@@ -221,6 +224,7 @@
 				0341A1281AB4BC3500320BA8 /* docker-loading@2x.png in Resources */,
 				0341A0F71AB49FEE00320BA8 /* Images.xcassets in Resources */,
 				AFA26B891AB8365500014A6F /* docker-dark@2x.png in Resources */,
+				AF625AC41AB87FBC00FDC72E /* docker-alt-dark@2x.png in Resources */,
 				0341A0FA1AB49FEE00320BA8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
