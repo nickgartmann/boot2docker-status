@@ -15,7 +15,12 @@
 @property BOOL haveRequestedStateChange;
 @end
 
-
+typedef NS_ENUM(NSUInteger, B2DState) {
+	B2DIsUp = 0,
+	B2DGoingDown,
+	B2DIsDown,
+	B2DGoingUp,
+};
 
 
 @implementation AppDelegate
@@ -29,7 +34,7 @@
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     
     _standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    
+
     [_standardUserDefaults registerDefaults:@{
         @"DisplayWindowOnStartup": @YES
     }];
@@ -38,9 +43,9 @@
     _statusItem.title = @"";
     
     if([self isBoot2DockerRunning]) {
-        _statusItem.image = [NSImage imageNamed:@"docker"];
+		_statusItem.image = [self renderIconForState:B2DIsUp];
     } else {
-        _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+		_statusItem.image = [self renderIconForState:B2DIsDown];
     }
     
     // The image gets a blue background when the item is selected
@@ -110,10 +115,11 @@
         [self.statusItem setHighlightMode:YES];
         [self openMenu];
     } else {
-        _statusItem.image = [NSImage imageNamed:@"docker-loading"];
         if([self isBoot2DockerRunning]) {
+			_statusItem.image = [self renderIconForState:B2DGoingDown];
             [self stopBoot2Docker];
         } else {
+			_statusItem.image = [self renderIconForState:B2DGoingUp];
             [self startBoot2Docker];
         }
     }
@@ -122,9 +128,9 @@
 - (void)renderIcon:(id)sender {
     if(!_haveRequestedStateChange) {
         if([self isBoot2DockerRunning]) {
-            _statusItem.image = [NSImage imageNamed:@"docker"];
+			_statusItem.image = [self renderIconForState:B2DIsUp];
         } else {
-            _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+			_statusItem.image = [self renderIconForState:B2DIsDown];
         }
     }
 }
@@ -158,7 +164,7 @@
     
     [task setTerminationHandler:^(NSTask *t) {
         _haveRequestedStateChange = NO;
-        _statusItem.image = [NSImage imageNamed:@"docker"];
+		_statusItem.image = [self renderIconForState:B2DIsUp];
     }];
     
     [task launch];
@@ -172,11 +178,56 @@
     
     [task setTerminationHandler:^(NSTask *t) {
         _haveRequestedStateChange = NO;
-        _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+		_statusItem.image = [self renderIconForState:B2DIsDown];
     }];
     
     [task launch];
 }
 
+- (BOOL)isDarkMode {
+	NSString *osxMode = [_standardUserDefaults stringForKey:@"AppleInterfaceStyle"];
+	if ([osxMode isEqualToString:@"Dark"] || [osxMode isEqualToString:@"dark"]) {
+		return YES;
+	}
+	return NO;
+}
+
+- (NSImage*)renderIconForState:(B2DState)state {
+	NSImage* image = nil;
+	NSColor* color = nil;
+
+	switch (state) {
+		case B2DIsUp:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-dark"] : [NSImage imageNamed:@"docker"]) copy];
+			color = [NSColor greenColor];
+			break;
+		case B2DGoingDown:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor colorWithRed:1 green:.6 blue:0 alpha:1];
+			break;
+		case B2DIsDown:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor redColor];
+			break;
+		case B2DGoingUp:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor colorWithRed:1 green:.8 blue:0 alpha:1];
+			break;
+		default:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor redColor];
+			break;
+	}
+
+	NSBezierPath* notificationBubble = [NSBezierPath bezierPath];
+	[notificationBubble appendBezierPathWithOvalInRect:NSMakeRect(image.size.width-10, 1, 6, 6)];
+
+	[image lockFocus];
+	[color setFill];
+	[notificationBubble fill];
+	[image unlockFocus];
+
+	return image;
+}
 
 @end
