@@ -38,9 +38,9 @@
     _statusItem.title = @"";
     
     if([self isBoot2DockerRunning]) {
-        _statusItem.image = [NSImage imageNamed:@"docker"];
     } else {
-        _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor greenColor]];
+		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor redColor]];
     }
     
     // The image gets a blue background when the item is selected
@@ -110,10 +110,11 @@
         [self.statusItem setHighlightMode:YES];
         [self openMenu];
     } else {
-        _statusItem.image = [NSImage imageNamed:@"docker-loading"];
         if([self isBoot2DockerRunning]) {
+			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor colorWithRed:1 green:.6 blue:0 alpha:1]];
             [self stopBoot2Docker];
         } else {
+			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor colorWithRed:1 green:.8 blue:0 alpha:1]];
             [self startBoot2Docker];
         }
     }
@@ -122,9 +123,9 @@
 - (void)renderIcon:(id)sender {
     if(!_haveRequestedStateChange) {
         if([self isBoot2DockerRunning]) {
-            _statusItem.image = [NSImage imageNamed:@"docker"];
+			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor greenColor]];
         } else {
-            _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor redColor]];
         }
     }
 }
@@ -158,7 +159,7 @@
     
     [task setTerminationHandler:^(NSTask *t) {
         _haveRequestedStateChange = NO;
-        _statusItem.image = [NSImage imageNamed:@"docker"];
+		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor greenColor]];
     }];
     
     [task launch];
@@ -172,11 +173,24 @@
     
     [task setTerminationHandler:^(NSTask *t) {
         _haveRequestedStateChange = NO;
-        _statusItem.image = [NSImage imageNamed:@"docker-alt"];
+		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor redColor]];
     }];
     
     [task launch];
 }
 
+- (NSImage*)_iconWithNotificationBubbleWithColor:(NSColor*)color {
+	NSImage* image = [[NSImage imageNamed:@"docker"] copy];
+
+	NSBezierPath* notificationBubble = [NSBezierPath bezierPath];
+	[notificationBubble appendBezierPathWithOvalInRect:NSMakeRect(image.size.width-10, 1, 6, 6)];
+
+	[image lockFocus];
+	[color setFill];
+	[notificationBubble fill];
+	[image unlockFocus];
+
+	return image;
+}
 
 @end
