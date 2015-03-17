@@ -13,6 +13,7 @@
 @property (weak) NSUserDefaults *standardUserDefaults;
 @property (weak) IBOutlet NSWindow *window;
 @property BOOL haveRequestedStateChange;
+@property BOOL darkMode;
 @end
 
 
@@ -30,6 +31,12 @@
     
     _standardUserDefaults = [NSUserDefaults standardUserDefaults];
     
+	_darkMode = NO;
+    NSString *osxMode = [_standardUserDefaults stringForKey:@"AppleInterfaceStyle"];
+	if ([osxMode isEqualToString:@"Dark"] || [osxMode isEqualToString:@"dark"]) {
+		_darkMode = YES;
+	}
+
     [_standardUserDefaults registerDefaults:@{
         @"DisplayWindowOnStartup": @YES
     }];
@@ -180,7 +187,7 @@
 }
 
 - (NSImage*)_iconWithNotificationBubbleWithColor:(NSColor*)color {
-	NSImage* image = [[NSImage imageNamed:@"docker"] copy];
+	NSImage* image = [(_darkMode ? [NSImage imageNamed:@"docker-dark"] : [NSImage imageNamed:@"docker"]) copy];
 
 	NSBezierPath* notificationBubble = [NSBezierPath bezierPath];
 	[notificationBubble appendBezierPathWithOvalInRect:NSMakeRect(image.size.width-10, 1, 6, 6)];
