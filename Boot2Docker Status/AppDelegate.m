@@ -13,10 +13,14 @@
 @property (weak) NSUserDefaults *standardUserDefaults;
 @property (weak) IBOutlet NSWindow *window;
 @property BOOL haveRequestedStateChange;
-@property BOOL darkMode;
 @end
 
-
+typedef NS_ENUM(NSUInteger, B2DState) {
+	B2DIsUp = 0,
+	B2DGoingDown,
+	B2DIsDown,
+	B2DGoingUp,
+};
 
 
 @implementation AppDelegate
@@ -30,12 +34,6 @@
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     
     _standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    
-	_darkMode = NO;
-    NSString *osxMode = [_standardUserDefaults stringForKey:@"AppleInterfaceStyle"];
-	if ([osxMode isEqualToString:@"Dark"] || [osxMode isEqualToString:@"dark"]) {
-		_darkMode = YES;
-	}
 
     [_standardUserDefaults registerDefaults:@{
         @"DisplayWindowOnStartup": @YES
@@ -45,9 +43,9 @@
     _statusItem.title = @"";
     
     if([self isBoot2DockerRunning]) {
+		_statusItem.image = [self renderIconForState:B2DIsUp];
     } else {
-		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor greenColor]];
-		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor redColor]];
+		_statusItem.image = [self renderIconForState:B2DIsDown];
     }
     
     // The image gets a blue background when the item is selected
@@ -118,10 +116,10 @@
         [self openMenu];
     } else {
         if([self isBoot2DockerRunning]) {
-			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor colorWithRed:1 green:.6 blue:0 alpha:1]];
+			_statusItem.image = [self renderIconForState:B2DGoingDown];
             [self stopBoot2Docker];
         } else {
-			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor colorWithRed:1 green:.8 blue:0 alpha:1]];
+			_statusItem.image = [self renderIconForState:B2DGoingUp];
             [self startBoot2Docker];
         }
     }
@@ -130,9 +128,9 @@
 - (void)renderIcon:(id)sender {
     if(!_haveRequestedStateChange) {
         if([self isBoot2DockerRunning]) {
-			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor greenColor]];
+			_statusItem.image = [self renderIconForState:B2DIsUp];
         } else {
-			_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor redColor]];
+			_statusItem.image = [self renderIconForState:B2DIsDown];
         }
     }
 }
@@ -166,7 +164,7 @@
     
     [task setTerminationHandler:^(NSTask *t) {
         _haveRequestedStateChange = NO;
-		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor greenColor]];
+		_statusItem.image = [self renderIconForState:B2DIsUp];
     }];
     
     [task launch];
@@ -180,14 +178,46 @@
     
     [task setTerminationHandler:^(NSTask *t) {
         _haveRequestedStateChange = NO;
-		_statusItem.image = [self _iconWithNotificationBubbleWithColor:[NSColor redColor]];
+		_statusItem.image = [self renderIconForState:B2DIsDown];
     }];
     
     [task launch];
 }
 
-- (NSImage*)_iconWithNotificationBubbleWithColor:(NSColor*)color {
-	NSImage* image = [(_darkMode ? [NSImage imageNamed:@"docker-dark"] : [NSImage imageNamed:@"docker"]) copy];
+- (BOOL)isDarkMode {
+	NSString *osxMode = [_standardUserDefaults stringForKey:@"AppleInterfaceStyle"];
+	if ([osxMode isEqualToString:@"Dark"] || [osxMode isEqualToString:@"dark"]) {
+		return YES;
+	}
+	return NO;
+}
+
+- (NSImage*)renderIconForState:(B2DState)state {
+	NSImage* image = nil;
+	NSColor* color = nil;
+
+	switch (state) {
+		case B2DIsUp:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-dark"] : [NSImage imageNamed:@"docker"]) copy];
+			color = [NSColor greenColor];
+			break;
+		case B2DGoingDown:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor colorWithRed:1 green:.6 blue:0 alpha:1];
+			break;
+		case B2DIsDown:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor redColor];
+			break;
+		case B2DGoingUp:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor colorWithRed:1 green:.8 blue:0 alpha:1];
+			break;
+		default:
+			image = [([self isDarkMode] ? [NSImage imageNamed:@"docker-alt-dark"] : [NSImage imageNamed:@"docker-alt"]) copy];
+			color = [NSColor redColor];
+			break;
+	}
 
 	NSBezierPath* notificationBubble = [NSBezierPath bezierPath];
 	[notificationBubble appendBezierPathWithOvalInRect:NSMakeRect(image.size.width-10, 1, 6, 6)];
