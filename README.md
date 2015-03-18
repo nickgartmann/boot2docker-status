@@ -10,7 +10,8 @@ Just click the whale, and you're off to the races.
 ## Installation
 
 [Download the app](http://boot2docker-status.nickgartmann.com/Boot2Docker%20Status-v1.0.0.zip), unzip it,
-and move it to your `/Applications` directory. Then just launch the app.
+and move it to your `/Applications` directory. Then just launch the app. Use `cmd+click` on the menu bar icon 
+to change preferences or quit.
 
 ## What it does
 
